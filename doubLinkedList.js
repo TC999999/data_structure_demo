@@ -1,3 +1,4 @@
+// nodes that have both a next node and a previous node property
 class DoubleNode {
   constructor(val, next = null, prev = null) {
     this.val = val;
@@ -13,6 +14,7 @@ class DoubleLinkedList {
     this.length = length;
   }
 
+  //returns the double linked list as a compact array
   array(node = this.head, arr = []) {
     if (node) {
       arr.push(node.val);
@@ -22,6 +24,7 @@ class DoubleLinkedList {
     }
   }
 
+  // returns the double linked list as a compact array, but in reverse
   reverseArray(node = this.tail, arr = []) {
     if (node) {
       arr.push(node.val);
@@ -31,6 +34,7 @@ class DoubleLinkedList {
     }
   }
 
+  // returns a boolean if there's a node that contains the inputted value
   find(val, node = this.head) {
     if (node) {
       if (val === node.val) {
@@ -41,6 +45,7 @@ class DoubleLinkedList {
     return false;
   }
 
+  // pushes a node with a value to the end of the double linked list
   push(val) {
     let newNode = new DoubleNode(val);
     if (this.length === 0) {
@@ -54,6 +59,7 @@ class DoubleLinkedList {
     this.length++;
   }
 
+  //removes a node at the end of the double linked list and returns its value. Fails if the list is empty
   pop() {
     if (this.length === 0) {
       throw new Error("Linked List is already empty");
@@ -73,6 +79,7 @@ class DoubleLinkedList {
     }
   }
 
+  //adds a node to the start of the double linked list
   unshift(val) {
     let newNode = new DoubleNode(val);
     if (this.length === 0) {
@@ -86,6 +93,7 @@ class DoubleLinkedList {
     this.length++;
   }
 
+  //removes the first node of the linked list and returns the removed value. Throws an error if the list is empty
   shift() {
     if (this.length === 0) {
       throw new Error("Linked List is already empty");
@@ -104,6 +112,7 @@ class DoubleLinkedList {
     }
   }
 
+  //returns the node at the inputted index
   getAt(idx) {
     if (idx >= this.length || idx < 0) {
       throw new Error("inputted index is invalid");
@@ -115,14 +124,17 @@ class DoubleLinkedList {
       currentNode = currentNode.next;
       i++;
     }
-    return currentNode.val;
+    return currentNode;
   }
 
+  //inserts a value at the specified index in the linked list
   insertAt(idx, val) {
-    if (idx >= this.length || idx < 0) {
+    if (idx > this.length || idx < 0) {
       throw new Error("inputted index is invalid");
     } else if (idx === 0) {
       this.unshift(val);
+    } else if (idx === this.length) {
+      this.push(val);
     } else {
       let i = 0;
       let currentNode = this.head;
@@ -140,6 +152,7 @@ class DoubleLinkedList {
     }
   }
 
+  //removes a node at the specified index and returns the removed value. Throws an error if either the list is empty or the index is invalid
   removeAt(idx) {
     if (this.length === 0) {
       throw new Error("Linked List is already empty");
@@ -147,9 +160,9 @@ class DoubleLinkedList {
       if (idx >= this.length || idx < 0) {
         throw new Error("inputted index is invalid");
       } else if (idx === 0) {
-        this.shift();
+        return this.shift();
       } else if (idx === this.length - 1) {
-        this.pop();
+        return this.pop();
       } else {
         let i = 0;
         let currentNode = this.head;
@@ -167,17 +180,25 @@ class DoubleLinkedList {
     }
   }
 
+  //gets the average
   getAverage() {
-    let currentNode = this.head;
-    let avg = 0;
-    while (currentNode) {
-      avg += currentNode.val;
-      currentNode = currentNode.next;
+    if (this.head) {
+      let currentNode = this.head;
+      let avg = 0;
+      while (currentNode) {
+        avg += currentNode.val;
+        currentNode = currentNode.next;
+      }
+      return avg / this.length;
     }
-    return avg / this.length;
+    throw new Error("linked list is empty");
   }
 
+  //reverses the double linked list in place
   reverse() {
+    if (this.length === 0 || this.length === 1) {
+      throw new Error("not enough nodes to reverse");
+    }
     let currentNode = this.head;
     let newHeadNode = this.tail;
     for (let i = 0; i < this.length; i++) {
@@ -196,9 +217,4 @@ class DoubleLinkedList {
   }
 }
 
-const dll = new DoubleLinkedList();
-const eDLL = new DoubleLinkedList();
-dll.push(1);
-dll.push(2);
-dll.push(3);
-dll.push(4);
+module.exports = { DoubleLinkedList };

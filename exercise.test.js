@@ -3,7 +3,7 @@ const { balancedBrackets } = require("./brackets");
 const { calc } = require("./calculator");
 const { JosephusSurvivor } = require("./joseph");
 
-describe("stack and queue uses examples", function () {
+describe("stack and queue uses examples (Reverse String, Balanced Brackets, Polish Calculator, Josephus Survivor)", function () {
   test("string reverse", function () {
     expect(stringReverse("This string should be reversed!")).toEqual(
       "!desrever eb dluohs gnirts sihT"
