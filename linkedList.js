@@ -12,15 +12,6 @@ class LinkedList {
     this.length = length;
   }
 
-  //prints all values of the linked list
-  traverse() {
-    let currentNode = this.head;
-    while (currentNode) {
-      console.log(currentNode.val);
-      currentNode = currentNode.next;
-    }
-  }
-
   //makes an array of the linked list
   array(node = this.head, arr = []) {
     if (node) {
@@ -127,10 +118,12 @@ class LinkedList {
 
   //inserts an inputted value at the inputted index of the linked list
   insertAt(idx, val) {
-    if (idx >= this.length || idx < 0) {
+    if (idx > this.length || idx < 0) {
       throw new Error("inputted index is invalid");
     } else if (idx === 0) {
       this.unshift(val);
+    } else if (idx === this.length) {
+      this.push(val);
     } else {
       let i = 0;
       let currentNode = this.head;
@@ -154,8 +147,7 @@ class LinkedList {
     } else {
       if (idx < 0 || idx >= this.length) {
         throw new Error("inputted index is invalid");
-      }
-      if (idx === 0) {
+      } else if (idx === 0) {
         return this.shift();
       } else if (idx === this.length - 1) {
         return this.pop();
@@ -178,6 +170,9 @@ class LinkedList {
   //if the linked list is comprised of numbers, gets the average of the numbers of the linked list
   getAverage() {
     let currentNode = this.head;
+    if (!currentNode) {
+      throw new Error("linked list is empty");
+    }
     let avg = 0;
     while (currentNode) {
       avg += currentNode.val;
@@ -188,8 +183,12 @@ class LinkedList {
 
   //reverses a linked list in place
   reverse() {
+    if (this.length === 0 || this.length === 1) {
+      throw new Error("not enough nodes to reverse");
+    }
     let currentNode = this.head;
     let newHeadNode = this.tail;
+
     for (let i = 0; i < this.length; i++) {
       this.head = currentNode.next;
       currentNode.next = newHeadNode.next;
@@ -220,10 +219,4 @@ class LinkedList {
   }
 }
 
-const ll = new LinkedList();
-const emptyLL = new LinkedList();
-ll.push(1);
-ll.push(2);
-ll.push(3);
-ll.push(4);
-ll.push(5);
+module.exports = { LinkedList };

@@ -1,3 +1,5 @@
+const { Stack } = require("./stack");
+
 // Reverses a string using a stack
 
 function stringReverse(string) {
@@ -12,3 +14,5 @@ function stringReverse(string) {
   }
   return revString;
 }
+
+module.exports = { stringReverse };

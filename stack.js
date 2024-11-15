@@ -14,6 +14,7 @@ class Stack {
     this.size = size;
   }
 
+  //pushes a node with a value to the top of the stack
   push(val) {
     let newNode = new StackNode(val);
     if (this.size === 0) {
@@ -23,11 +24,11 @@ class Stack {
     } else {
       newNode.next = this.top;
       this.top = newNode;
-
       this.size++;
     }
   }
 
+  //removes the node at the top of the stack and returns its value. Throws an error if the stack is empty
   pop() {
     if (this.size === 0) {
       throw new Error("Stack is already empty");
@@ -45,6 +46,7 @@ class Stack {
     }
   }
 
+  // returns the value of the node at the top of the stack
   peek() {
     if (this.top) {
       return this.top.val;
@@ -53,14 +55,23 @@ class Stack {
     }
   }
 
+  // returns a boolean if the stack is empty
   isEmpty() {
     return this.size === 0;
   }
+
+  //shows the stack as a compact array
+  array() {
+    let arr = [];
+    if (this.size) {
+      let currentNode = this.top;
+      while (currentNode) {
+        arr.push(currentNode.val);
+        currentNode = currentNode.next;
+      }
+    }
+    return arr;
+  }
 }
 
-const s = new Stack();
-const emptyS = new Stack();
-s.push(1);
-s.push(2);
-s.push(3);
-s.push(4);
+module.exports = { Stack };

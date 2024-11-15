@@ -1,3 +1,5 @@
+const { LinkedList } = require("./linkedList");
+
 // Solves the classic josephus algorithm. among a certain group of size "size", who would be the final survivor if we skipped every "skip" person
 
 function JosephusSurvivor(size, skip) {
@@ -21,3 +23,5 @@ function JosephusSurvivor(size, skip) {
 
   return jLL.head.val;
 }
+
+module.exports = { JosephusSurvivor };

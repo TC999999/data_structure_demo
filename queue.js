@@ -14,6 +14,7 @@ class Queue {
     this.size = size;
   }
 
+  //adds a value to the end of the queue
   enqueue(val) {
     let newNode = new QueueNode(val);
     if (this.size === 0) {
@@ -26,6 +27,7 @@ class Queue {
     this.size++;
   }
 
+  // removes a value from the start of the queue and returns removed value. Throws an error if queue is empty
   dequeue() {
     if (this.size === 0) {
       throw new Error("Queue is already empty");
@@ -43,6 +45,7 @@ class Queue {
     }
   }
 
+  // returns the value of the node at the start of the queue
   peek() {
     if (this.first) {
       return this.first.val;
@@ -51,14 +54,10 @@ class Queue {
     }
   }
 
+  // returns a boolean if the queue is empty
   isEmpty() {
     return this.size === 0;
   }
 }
 
-const q = new Queue();
-const emptyQ = new Queue();
-q.enqueue(1);
-q.enqueue(2);
-q.enqueue(3);
-q.enqueue(4);
+module.exports = { Queue };

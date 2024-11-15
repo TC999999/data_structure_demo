@@ -1,8 +1,6 @@
+const { Stack } = require("./stack");
+
 // Checks to see if a string has brackets balanced
-// balancedBrackets("[hello]") true
-// balancedBrackets("[(hello)]") true
-// balancedBrackets("[(hello])") false
-// balancedBrackets("[(hello)") false
 function balancedBrackets(string) {
   let bracketStack = new Stack();
   let openingBracket = ["(", "[", "{"];
@@ -26,3 +24,5 @@ function balancedBrackets(string) {
   }
   return true;
 }
+
+module.exports = { balancedBrackets };
