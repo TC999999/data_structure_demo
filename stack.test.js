@@ -17,12 +17,12 @@ describe("Stack", function () {
 
   test("peek returns the value of the topmost node in the stack", function () {
     expect(s.peek()).toEqual(4);
-    expect(es.peek()).toBe(null);
+    expect(es.peek()).toBeNull();
   });
 
   test("isEmpty returns whether the stack is empty or not", function () {
-    expect(s.isEmpty()).toBe(false);
-    expect(es.isEmpty()).toBe(true);
+    expect(s.isEmpty()).toBeFalsy();
+    expect(es.isEmpty()).toBeTruthy();
   });
 
   test("push adds values to the top of the stack", function () {
@@ -34,8 +34,8 @@ describe("Stack", function () {
 
   test("pushing values to an empty stack makes the value both the top and the bottom", function () {
     expect(es.size).toEqual(0);
-    expect(es.top).toBe(null);
-    expect(es.bottom).toBe(null);
+    expect(es.top).toBeNull();
+    expect(es.bottom).toBeNull();
 
     es.push(1);
     expect(es.size).toEqual(1);
@@ -56,16 +56,12 @@ describe("Stack", function () {
     expect(es.bottom.val).toEqual(1);
     expect(es.size).toEqual(1);
     expect(es.pop()).toEqual(1);
-    expect(es.top).toBe(null);
-    expect(es.bottom).toBe(null);
+    expect(es.top).toBeNull();
+    expect(es.bottom).toBeNull();
     expect(es.size).toEqual(0);
   });
 
   test("faisl to pop values from an empty stack", function () {
-    try {
-      es.pop();
-    } catch (err) {
-      expect(err.message).toEqual("Stack is already empty");
-    }
+    expect(() => es.pop()).toThrow("Stack is already empty");
   });
 });

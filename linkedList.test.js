@@ -20,13 +20,12 @@ describe("Singly Linked List", function () {
   });
 
   test("make an array from the linked list", function () {
-    let arr = l.array();
-    expect(arr).toEqual([1, 2, 3, 4, 5]);
+    expect(l.array()).toEqual([1, 2, 3, 4, 5]);
   });
 
   test("finds node with inputted value in linked list", function () {
-    expect(l.find(1)).toBe(true);
-    expect(l.find(6)).toBe(false);
+    expect(l.find(1)).toBeTruthy();
+    expect(l.find(6)).toBeFalsy();
   });
 
   test("values can be pushed at the end of the linked list", function () {
@@ -56,11 +55,7 @@ describe("Singly Linked List", function () {
   });
 
   test("fails to pop an empty linked list", function () {
-    try {
-      el.pop();
-    } catch (err) {
-      expect(err.message).toBe("Linked List is already empty");
-    }
+    expect(() => el.pop()).toThrow("Linked List is already empty");
   });
 
   test("values can be unshifted at the start of the linked list", function () {
@@ -85,16 +80,12 @@ describe("Singly Linked List", function () {
     expect(el.head.val).toEqual(0);
     expect(el.tail.val).toEqual(0);
     el.shift();
-    expect(el.head).toBe(null);
-    expect(el.tail).toBe(null);
+    expect(el.head).toBeNull();
+    expect(el.tail).toBeNull();
   });
 
   test("fails to shift from an empty linked list", function () {
-    try {
-      el.shift();
-    } catch (err) {
-      expect(err.message).toBe("Linked List is already empty");
-    }
+    expect(() => el.shift()).toThrow("Linked List is already empty");
   });
 
   test("returns the value at the inputted index of the linked list", function () {
@@ -104,17 +95,8 @@ describe("Singly Linked List", function () {
   });
 
   test("fails to return the value of an invalid index", function () {
-    try {
-      l.getAt(0);
-    } catch (err) {
-      expect(err.message).toEqual("inputted index is invalid");
-    }
-
-    try {
-      l.getAt(6);
-    } catch (err) {
-      expect(err.message).toEqual("inputted index is invalid");
-    }
+    expect(() => l.getAt(-1)).toThrow("inputted index is invalid");
+    expect(() => l.getAt(6)).toThrow("inputted index is invalid");
   });
 
   test("inserts value into linked list at any valid index inputted", function () {
@@ -136,11 +118,7 @@ describe("Singly Linked List", function () {
   });
 
   test("unshifts value into empty linked list when index inputted is 0", function () {
-    try {
-      el.getAt(0);
-    } catch (err) {
-      expect(err.message).toEqual("inputted index is invalid");
-    }
+    expect(() => el.getAt(0)).toThrow("inputted index is invalid");
 
     el.insertAt(0, 1);
     expect(el.getAt(0)).toEqual(1);
@@ -160,17 +138,8 @@ describe("Singly Linked List", function () {
   });
 
   test("fails to insert the value if the index is less than 0 or greater than the length of the list", function () {
-    try {
-      l.insertAt(-1, -1);
-    } catch (err) {
-      expect(err.message).toEqual("inputted index is invalid");
-    }
-
-    try {
-      l.insertAt(10, 11);
-    } catch (err) {
-      expect(err.message).toEqual("inputted index is invalid");
-    }
+    expect(() => l.insertAt(-1, -1)).toThrow("inputted index is invalid");
+    expect(() => l.insertAt(10, 11)).toThrow("inputted index is invalid");
   });
 
   test("remove value from inputted index in linked list", function () {
@@ -207,22 +176,14 @@ describe("Singly Linked List", function () {
     expect(el.length).toEqual(1);
 
     el.removeAt(0);
-    try {
-      el.getAt(0);
-    } catch (err) {
-      expect(err.message).toEqual("inputted index is invalid");
-    }
-    expect(el.head).toBe(null);
-    expect(el.tail).toBe(null);
+    expect(() => el.getAt(0)).toThrow("inputted index is invalid");
+    expect(el.head).toBeNull();
+    expect(el.tail).toBeNull();
     expect(el.length).toEqual(0);
   });
 
   test("fails to remove value from empty linked list", function () {
-    try {
-      el.removeAt(0);
-    } catch (err) {
-      expect(err.message).toEqual("Linked List is already empty");
-    }
+    expect(() => el.removeAt(0)).toThrow("Linked List is already empty");
   });
 
   test("average function gets the average of the values in a linked list", function () {
@@ -239,18 +200,10 @@ describe("Singly Linked List", function () {
   });
 
   test("fails to reverse a linked list less than 1 nodes", function () {
-    try {
-      el.reverse();
-    } catch (err) {
-      expect(err.message).toEqual("not enough nodes to reverse");
-    }
+    expect(() => el.reverse()).toThrow("not enough nodes to reverse");
 
     el.push(0);
-    try {
-      el.reverse();
-    } catch (err) {
-      expect(err.message).toEqual("not enough nodes to reverse");
-    }
+    expect(() => el.reverse()).toThrow("not enough nodes to reverse");
 
     el.push(1);
     el.reverse();

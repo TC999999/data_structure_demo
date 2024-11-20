@@ -17,12 +17,12 @@ describe("Queue", function () {
 
   test("peek at the first value in a queue", function () {
     expect(q.peek()).toEqual(1);
-    expect(eq.peek()).toBe(null);
+    expect(eq.peek()).toBeNull();
   });
 
   test("check if the queue is empty", function () {
-    expect(q.isEmpty()).toBe(false);
-    expect(eq.isEmpty()).toBe(true);
+    expect(q.isEmpty()).toBeFalsy();
+    expect(eq.isEmpty()).toBeTruthy();
   });
 
   test("adds values to the end of the queue", function () {
@@ -34,8 +34,8 @@ describe("Queue", function () {
 
   test("adding a value to the end of an empty queue makes the new node both the head and tail", function () {
     expect(eq.size).toEqual(0);
-    expect(eq.first).toBe(null);
-    expect(eq.last).toBe(null);
+    expect(eq.first).toBeNull();
+    expect(eq.last).toBeNull();
 
     eq.enqueue(1);
     expect(eq.size).toEqual(1);
@@ -57,15 +57,11 @@ describe("Queue", function () {
     eq.dequeue();
 
     expect(eq.size).toEqual(0);
-    expect(eq.first).toBe(null);
-    expect(eq.last).toBe(null);
+    expect(eq.first).toBeNull();
+    expect(eq.last).toBeNull();
   });
 
   test("throws an error when removing values from an empty queue", function () {
-    try {
-      eq.dequeue();
-    } catch (err) {
-      expect(err.message).toEqual("Queue is already empty");
-    }
+    expect(() => eq.dequeue()).toThrow("Queue is already empty");
   });
 });

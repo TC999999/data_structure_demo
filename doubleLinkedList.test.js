@@ -29,9 +29,9 @@ describe("Double Linked List", function () {
   });
 
   test("find() returns a boolean for if a node with the inputted value exists in the list", function () {
-    expect(dl.find(3)).toBe(true);
-    expect(dl.find(5)).toBe(false);
-    expect(edl.find(1)).toBe(false);
+    expect(dl.find(3)).toBeTruthy();
+    expect(dl.find(5)).toBeFalsy();
+    expect(edl.find(1)).toBeFalsy();
   });
 
   test("push() adds a node with the inputted value to the end of a linked list and replace the tail", function () {
@@ -46,14 +46,14 @@ describe("Double Linked List", function () {
   });
 
   test("pushing onto an empty linked list makes the new node both the head and the tail of linked list", function () {
-    expect(edl.tail).toBe(null);
-    expect(edl.head).toEqual(null);
+    expect(edl.tail).toBeNull();
+    expect(edl.head).toBeNull();
 
     edl.push(0);
     expect(edl.tail.val).toEqual(0);
     expect(edl.head.val).toEqual(0);
-    expect(edl.head.next).toBe(null);
-    expect(edl.tail.prev).toBe(null);
+    expect(edl.head.next).toBeNull();
+    expect(edl.tail.prev).toBeNull();
     expect(edl.length).toEqual(1);
   });
 
@@ -72,14 +72,14 @@ describe("Double Linked List", function () {
     expect(edl.head.val).toEqual(0);
 
     expect(edl.pop()).toEqual(0);
-    expect(edl.tail).toEqual(null);
-    expect(edl.head).toEqual(null);
+    expect(edl.tail).toBeNull();
+    expect(edl.head).toBeNull();
     expect(edl.length).toEqual(0);
   });
 
   test("throws an error when attempting to pop from an empty linked list", function () {
-    expect(edl.tail).toBe(null);
-    expect(edl.head).toBe(null);
+    expect(edl.tail).toBeNull();
+    expect(edl.head).toBeNull();
     expect(() => edl.pop()).toThrow("Linked List is already empty");
   });
 
@@ -96,14 +96,14 @@ describe("Double Linked List", function () {
   });
 
   test("unshifting onto an empty linked list makes the the new node both the head and the tail", function () {
-    expect(edl.head).toBe(null);
-    expect(edl.tail).toBe(null);
+    expect(edl.head).toBeNull();
+    expect(edl.tail).toBeNull();
 
     edl.unshift(5);
     expect(edl.tail.val).toEqual(5);
     expect(edl.head.val).toEqual(5);
-    expect(edl.head.next).toBe(null);
-    expect(edl.tail.prev).toBe(null);
+    expect(edl.head.next).toBeNull();
+    expect(edl.tail.prev).toBeNull();
     expect(edl.length).toEqual(1);
   });
 
@@ -113,7 +113,7 @@ describe("Double Linked List", function () {
 
     expect(dl.shift()).toEqual(1);
     expect(dl.head.val).toEqual(2);
-    expect(dl.head.prev).toBe(null);
+    expect(dl.head.prev).toBeNull();
     expect(dl.head.next.val).toEqual(3);
     expect(dl.length).toEqual(len - 1);
   });
@@ -123,14 +123,14 @@ describe("Double Linked List", function () {
     expect(edl.tail.val).toEqual(5);
 
     expect(edl.shift()).toEqual(5);
-    expect(edl.tail).toEqual(null);
-    expect(edl.head).toEqual(null);
+    expect(edl.tail).toBeNull();
+    expect(edl.head).toBeNull();
     expect(edl.length).toEqual(0);
   });
 
   test("shifting from an empty linked list throws an error", function () {
-    expect(edl.head).toBe(null);
-    expect(edl.tail).toBe(null);
+    expect(edl.head).toBeNull();
+    expect(edl.tail).toBeNull();
 
     expect(() => edl.shift()).toThrow("Linked List is already empty");
   });
@@ -163,14 +163,14 @@ describe("Double Linked List", function () {
     expect(dl.head.next.val).toEqual(1);
     expect(dl.length).toEqual(len + 1);
 
-    expect(edl.head).toBe(null);
-    expect(edl.tail).toBe(null);
+    expect(edl.head).toBeNull();
+    expect(edl.tail).toBeNull();
 
     edl.insertAt(0, 0);
     expect(edl.head.val).toEqual(0);
     expect(edl.tail.val).toEqual(0);
-    expect(edl.head.next).toBe(null);
-    expect(edl.tail.prev).toBe(null);
+    expect(edl.head.next).toBeNull();
+    expect(edl.tail.prev).toBeNull();
     expect(edl.length).toEqual(1);
   });
 
@@ -185,12 +185,12 @@ describe("Double Linked List", function () {
 
     expect(edl.head.val).toEqual(0);
     expect(edl.tail.val).toEqual(0);
-    expect(edl.head.next).toBe(null);
-    expect(edl.tail.prev).toBe(null);
+    expect(edl.head.next).toBeNull();
+    expect(edl.tail.prev).toBeNull();
 
     edl.insertAt(1, 1);
-    expect(edl.head.next.val).toBe(1);
-    expect(edl.tail.prev.val).toBe(0);
+    expect(edl.head.next.val).toEqual(1);
+    expect(edl.tail.prev.val).toEqual(0);
     expect(edl.length).toEqual(2);
   });
 
@@ -207,49 +207,49 @@ describe("Double Linked List", function () {
 
     expect(dl.removeAt(2)).toEqual(3);
     expect(dl.getAt(2).val).toEqual(4);
-    expect(dl.getAt(2).next).toBe(null);
+    expect(dl.getAt(2).next).toBeNull();
     expect(dl.getAt(2).prev.val).toEqual(2);
     expect(dl.length).toEqual(3);
-    expect(dl.array()).toEqual[(1, 2, 4)];
+    expect(dl.array()).toEqual([1, 2, 4]);
   });
 
   test("removing a value at index 0 simply shifts the node from the linked list", function () {
     expect(dl.head.val).toEqual(1);
     expect(dl.head.next.val).toEqual(2);
-    expect(dl.head.prev).toBe(null);
+    expect(dl.head.prev).toBeNull();
 
     expect(dl.removeAt(0)).toEqual(1);
     expect(dl.head.val).toEqual(2);
     expect(dl.head.next.val).toEqual(3);
-    expect(dl.head.prev).toBe(null);
+    expect(dl.head.prev).toBeNull();
 
     expect(edl.head.val).toEqual(0);
     expect(edl.head.next.val).toEqual(1);
-    expect(edl.head.prev).toBe(null);
+    expect(edl.head.prev).toBeNull();
 
     expect(edl.removeAt(0)).toEqual(0);
     expect(edl.head.val).toEqual(1);
-    expect(edl.head.next).toBe(null);
-    expect(edl.head.prev).toBe(null);
+    expect(edl.head.next).toBeNull();
+    expect(edl.head.prev).toBeNull();
   });
 
   test("removing a value at the last index of the linked list pops the last node", function () {
     expect(dl.tail.val).toEqual(4);
-    expect(dl.tail.next).toBe(null);
+    expect(dl.tail.next).toBeNull();
     expect(dl.tail.prev.val).toEqual(3);
 
     expect(dl.removeAt(3)).toEqual(4);
     expect(dl.tail.val).toEqual(3);
-    expect(dl.tail.next).toBe(null);
+    expect(dl.tail.next).toBeNull();
     expect(dl.tail.prev.val).toEqual(2);
 
     expect(edl.tail.val).toEqual(1);
-    expect(edl.tail.next).toBe(null);
-    expect(edl.tail.prev).toBe(null);
+    expect(edl.tail.next).toBeNull();
+    expect(edl.tail.prev).toBeNull();
 
     expect(edl.removeAt(0)).toEqual(1);
-    expect(edl.head).toBe(null);
-    expect(edl.head).toBe(null);
+    expect(edl.head).toBeNull();
+    expect(edl.head).toBeNull();
   });
 
   test("removing from an empty list throws an error", function () {

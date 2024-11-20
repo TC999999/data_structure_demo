@@ -11,10 +11,10 @@ describe("stack and queue uses examples (Reverse String, Balanced Brackets, Poli
   });
 
   test("returns if a string has balanced brackets", function () {
-    expect(balancedBrackets("[hello]")).toBe(true);
-    expect(balancedBrackets("[(hello)]")).toBe(true);
-    expect(balancedBrackets("[(hello])")).toBe(false);
-    expect(balancedBrackets("[(hello)")).toBe(false);
+    expect(balancedBrackets("[hello]")).toBeTruthy();
+    expect(balancedBrackets("[(hello)]")).toBeTruthy();
+    expect(balancedBrackets("[(hello])")).toBeFalsy();
+    expect(balancedBrackets("[(hello)")).toBeFalsy();
   });
 
   test("returns calculator result using polish notation", function () {
